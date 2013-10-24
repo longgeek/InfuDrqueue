@@ -1,0 +1,36 @@
+
+<div style="text-align:right; width:100%">
+<% form_tag :action => 'view_log', :id =>params[:id], :nr => params[:nr] do %>
+Refresh: <%= select_tag("refresh",
+		options_for_select([ ["", ""], ["30 seconds", "30"], ["1 minute", "60"], ["3 minutes", "180"], ["5 minutes", "300"], ["10 minutes", "600"] ], session[:last_refresh]),
+		{"onChange" => "document.forms[0].submit();"}) %>
+<% end %>
+</div>
+
+<br />
+这是任务'<%= @job.name %>'第#<%= (params[:nr].to_i + 1).to_s %>帧的日志.如果觉得有问题,滚动日志找到错误信息并通知管理员.
+<br /><br /><br />
+
+<div id="Logfile">
+<%
+if File.exist? @logfile
+	File.open("#{@logfile}",'r') do |file|
+		buffer = file.read
+		buffer.gsub!(/\n/,'<br />')
+		buffer.gsub!(/[^[:print:]]/, '')
+		%>
+		<%= buffer %>
+		<%
+	end
+else
+	%>
+	<br /><br />日志为空.<br /><br />
+	<%
+end
+%>
+<br />
+</div>
+
+<br /><br /><br />
+
+<%= link_to '返回', :action => 'show', :id => params[:id] %>

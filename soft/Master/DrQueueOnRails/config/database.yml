@@ -1,0 +1,6 @@
+production:
+  adapter: mysql
+  database: DrQueueOnRails
+  username: drqueue
+  password: drqueue
+  host: 10.12.39.161
