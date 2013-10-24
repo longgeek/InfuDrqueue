@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+source /etc/profile
+nohup master > /dev/null 2>&1 &
+nohup python2.6 /opt/get_complist.py > /dev/null 2>&1 &
+nohup python2.6 /opt/setPools.py > /dev/null 2>&1 &
+nohup sh /root/copy-client-reconnection.sh > /dev/null 2>&1 &
+nohup python2.6 /opt/reboot_node.py > /dev/null 2>&1 &
