@@ -98,7 +98,7 @@ yum -y install swig git
 gem install DrQueueRubyBindings -V
 gem install ruby-net-ldap
 gem sources -a http://gems.github.com
-gem install mislav-will_paginate -V
+gem install will_paginate -V
 gem install mongrel -V
 
 # DrQueueOnRails
